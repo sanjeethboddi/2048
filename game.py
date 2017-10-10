@@ -9,12 +9,12 @@ def board(l):
     """
     takes list as an arguement
     """
-    print("|---|---|---|---|")
+    print("|-----|-----|-----|-----|")
     i=0
     x=4
     while i<x:
-        print("| "+str(l[i*x+0])+" | "+str(l[i*x+1])+" | "+str(l[i*x+2])+" | "+str(l[i*x+3])+" |")
-        print("|---|---|---|---|")
+        print("|{:5s}|{:5s}|{:5s}|{:5s}|".format(str(l[i*x+0]),str(l[i*x+1]),str(l[i*x+2]),str(l[i*x+3])))
+        print("|-----|-----|-----|-----|")
         i+=1
 #end of board() function
 
