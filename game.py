@@ -1,7 +1,9 @@
 import random
 import os
 
-#start of board() function
+global score
+score=0
+
 #board function prints the 4X4 board
 def board(l):
     """
@@ -15,6 +17,7 @@ def board(l):
         print("|---|---|---|---|")
         i+=1
 #end of board() function
+
 
 #start of shift() function
 #shift function shifts the elements to left and add them properly
@@ -43,6 +46,8 @@ def shift(l):
             else:
                 if l[count]==l[count+1] and l[count]!=' ':
                     l[count]+=l[count+1]
+                    global score
+                    score +=l[count]
                     l[count+1]=' '
                     l=leftmover(l)
         return l
@@ -158,9 +163,11 @@ def gamestart():
         emptylist=check(l)
         l=fillemptylist(l,emptylist)
         total=0
+        os.system('cls' if os.name == 'nt' else 'clear')
         while True:
             print("\t \t ****2048****")
             print("\t \t ============")
+            print("score : {}".format(score))
             print("\n")
             board(l)
             l=move(str(input('make your move: ')),l)
@@ -179,6 +186,6 @@ def gamestart():
                     break
 
 #end of gamestart() function
-
+score =0
 filler =[2,2,2,2,2,2,2,2,4,2]
 gamestart()
