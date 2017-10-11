@@ -5,18 +5,25 @@ from colorama import *
 global score
 score=0
 
+#start of pos() function
+#pos() returns string of ANSI CODE
+def pos(x,y):
+    return '\x1b['+str(y)+';'+str(x)+'H'
+#end of pos() function
+
 #board function prints the 4X4 board
 def board(l):
     """
     takes list as an arguement
     """
-    print("|------|------|------|------|")
+    print("{loc}{styl}|------|------|------|------|".format(loc=pos(30,5),styl=Style.BRIGHT))
     i=0
     x=4
     while i<x:
-        print("{z}{y}|{a}{b}{c:6s}{z}{y}|{d}{e}{f:6s}{z}{y}|{g}{h}{n:6s}{z}{y}|{j}{k}{m:6s}{z}{y}|".format(z=Fore.RESET,y=Back.RESET,a=num_fore_col[str(l[i*x+0])],b=num_back_col[str(l[i*x+0])],c=str(l[i*x+0]),d=num_fore_col[str(l[i*x+1])],e=num_back_col[str(l[i*x+1])],f=str(l[i*x+1]),g=num_fore_col[str(l[i*x+2])],h=num_back_col[str(l[i*x+2])],n=str(l[i*x+2]),j=num_fore_col[str(l[i*x+3])],k=num_back_col[str(l[i*x+3])],m=str(l[i*x+3])))
-        print("|------|------|------|------|")
+        print("{loc}{styl}{z}{y}|{a}{b}{c:6s}{z}{y}|{d}{e}{f:6s}{z}{y}|{g}{h}{n:6s}{z}{y}|{j}{k}{m:6s}{z}{y}|".format(styl=Style.BRIGHT,loc=pos(30,5+(i*2)+1),z=Fore.RESET,y=Back.RESET,a=num_fore_col[str(l[i*x+0])],b=num_back_col[str(l[i*x+0])],c=str(l[i*x+0]),d=num_fore_col[str(l[i*x+1])],e=num_back_col[str(l[i*x+1])],f=str(l[i*x+1]),g=num_fore_col[str(l[i*x+2])],h=num_back_col[str(l[i*x+2])],n=str(l[i*x+2]),j=num_fore_col[str(l[i*x+3])],k=num_back_col[str(l[i*x+3])],m=str(l[i*x+3])))
+        print("{loc}{styl}|------|------|------|------|".format(styl=Style.BRIGHT,loc=pos(30,5+(i*2)+2)))
         i+=1
+    print("\n")
 #end of board() function
 
 
@@ -151,7 +158,7 @@ def move(x,l):
             for k , item in enumerate(j):
                 l[i*4+3-k]=item
     else:
-        print("wrong entry : try again")
+        pass
 
 
     if (x=='w' or x=='W' or x=='s' or x=='S' or x=='a' or x=='A' or x=='d' or x=='D') and temp!=l:
@@ -167,7 +174,8 @@ def gamestart():
     """
     takes no arguements
     """
-    init() #initializes colors
+    init(autoreset=True) #initializes colors
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("\t \t ***2048****")
     print("==============")
     print("W - to move up")
@@ -190,9 +198,9 @@ def gamestart():
         l=fillemptylist(l,emptylist)
         os.system('cls' if os.name == 'nt' else 'clear')
         while True:
-            print("\t \t ****2048****")
-            print("\t \t ============")
-            print("score : {}".format(score))
+            print("{loc}{styl}****2048****".format(loc=pos(38,2),styl=Style.BRIGHT))
+            print("{loc}{styl}============".format(loc=pos(38,3),styl=Style.BRIGHT))
+            print("{styl}score : {scor}".format(scor=score,styl=Style.BRIGHT))
             print("\n")
             board(l)
             l=move(str(input('make your move: ')),l)
