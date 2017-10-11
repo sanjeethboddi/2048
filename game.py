@@ -1,5 +1,6 @@
 import random
 import os
+from colorama import *
 
 global score
 score=0
@@ -9,12 +10,12 @@ def board(l):
     """
     takes list as an arguement
     """
-    print("|-----|-----|-----|-----|")
+    print("|------|------|------|------|")
     i=0
     x=4
     while i<x:
-        print("|{:5s}|{:5s}|{:5s}|{:5s}|".format(str(l[i*x+0]),str(l[i*x+1]),str(l[i*x+2]),str(l[i*x+3])))
-        print("|-----|-----|-----|-----|")
+        print("{z}{y}|{a}{b}{c:6s}{z}{y}|{d}{e}{f:6s}{z}{y}|{g}{h}{n:6s}{z}{y}|{j}{k}{m:6s}{z}{y}|".format(z=Fore.RESET,y=Back.RESET,a=num_fore_col[str(l[i*x+0])],b=num_back_col[str(l[i*x+0])],c=str(l[i*x+0]),d=num_fore_col[str(l[i*x+1])],e=num_back_col[str(l[i*x+1])],f=str(l[i*x+1]),g=num_fore_col[str(l[i*x+2])],h=num_back_col[str(l[i*x+2])],n=str(l[i*x+2]),j=num_fore_col[str(l[i*x+3])],k=num_back_col[str(l[i*x+3])],m=str(l[i*x+3])))
+        print("|------|------|------|------|")
         i+=1
 #end of board() function
 
@@ -166,6 +167,7 @@ def gamestart():
     """
     takes no arguements
     """
+    init() #initializes colors
     print("\t \t ***2048****")
     print("==============")
     print("W - to move up")
@@ -186,7 +188,6 @@ def gamestart():
         l=fillemptylist(l,emptylist)
         emptylist=check(l)
         l=fillemptylist(l,emptylist)
-        total=0
         os.system('cls' if os.name == 'nt' else 'clear')
         while True:
             print("\t \t ****2048****")
@@ -197,8 +198,6 @@ def gamestart():
             l=move(str(input('make your move: ')),l)
             os.system('cls' if os.name == 'nt' else 'clear')
             emptylist=check(l)
-            total+=1
-            print(str(total)+" moves made")
             if len(emptylist)==0:
                 if(isstopped(l)):
                     board(l)
@@ -206,6 +205,10 @@ def gamestart():
                     break
 
 #end of gamestart() function
+fore_col=(Fore.BLACK,Fore.BLUE,Fore.CYAN,Fore.MAGENTA,Fore.RED,Fore.GREEN,Fore.YELLOW,Fore.WHITE,Fore.RESET)
+back_col=(Back.BLACK,Back.BLUE,Back.CYAN,Back.MAGENTA,Back.RED,Back.GREEN,Back.YELLOW,Back.WHITE,Back.RESET)
+num_back_col={' ':Back.RESET,'2':Back.BLACK,'4':Back.BLUE,'8':Back.CYAN,'16':Back.MAGENTA,'32':Back.RED,'64':Back.GREEN,'128':Back.YELLOW,'256':Back.BLACK,'512':Back.BLUE,'1024':Back.CYAN,'2048':Back.WHITE,'4096':Back.MAGENTA,'8192':Back.RED,'16384':Back.GREEN,'32768':Back.YELLOW,'65536':Back.WHITE,'131072':Back.BLUE}
+num_fore_col={' ':Fore.RESET,'2':Fore.WHITE,'4':Fore.WHITE,'8':Fore.WHITE,'16':Fore.WHITE,'32':Fore.WHITE,'64':Fore.WHITE,'128':Fore.WHITE,'256':Fore.WHITE,'512':Fore.WHITE,'1024':Fore.WHITE,'2048':Fore.BLACK,'4096':Fore.MAGENTA,'8192':Fore.WHITE,'16384':Fore.WHITE,'32768':Fore.WHITE,'65536':Fore.BLACK,'131072':Fore.BLACK}
 score =0
 filler =[2,2,2,2,2,2,2,2,4,2]
 gamestart()
