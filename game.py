@@ -59,6 +59,30 @@ def shift(l):
     return l
 #end of shift() function
 
+#start of isstopped() function
+#isstopped checks whether there are any possibilities or not
+def isstopped(l):
+    i=0
+    j=0
+    while i<16:
+        j=0
+        while j<3:
+            if (l[i+j]==l[i+j+1]):
+                return False
+            j+=1
+        i+=4
+    i=0
+    j=0
+    while i<4:
+        j=0
+        while j<3:
+            if l[i + j*4] == l[i +(j+1)*4]:
+                return False
+            j+=1
+        i+=1
+    return True
+#end of isstopped() function
+
 #start of check() function
 #check funtion returns the a list of indices of empty spaces
 def check(l):
@@ -176,11 +200,7 @@ def gamestart():
             total+=1
             print(str(total)+" moves made")
             if len(emptylist)==0:
-                ctemp1=list(move('w',l))
-                ctemp2=list(move('s',l))
-                ctemp3=list(move('a',l))
-                ctemp4=list(move('d',l))
-                if(ctemp1==ctemp2==ctemp3==ctemp4==l):
+                if(isstopped(l)):
                     board(l)
                     print('gameover')
                     break
