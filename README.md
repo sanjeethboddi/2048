@@ -5,7 +5,10 @@ Use python3 to run the code
 
 make sure you have these libraries or modules installed:
 1. colorama
+2. getch
 
 
 if you dont have those. Use pip to install those modules.
+
+
 

@@ -1,5 +1,6 @@
 import random
 import os
+import getch
 from colorama import *
 
 global score
@@ -184,7 +185,9 @@ def gamestart():
     print("D - to move right")
     print("==============")
     while True:
-            x = str(input('press Y to Start the game and N to exit:  '))
+            print('press Y to Start the game and N to exit:  ',end="")
+            x = getch.getche()
+            print("")
             if x== 'Y' or x=='N' or x=='y' or x=='n':
                 break
             else:
@@ -203,7 +206,9 @@ def gamestart():
             print("{styl}score : {scor}".format(scor=score,styl=Style.BRIGHT))
             print("\n")
             board(l)
-            l=move(str(input('make your move: ')),l)
+            print('make your move: ',end="")
+            l=move(getch.getche(),l)
+            print("")
             os.system('cls' if os.name == 'nt' else 'clear')
             emptylist=check(l)
             if len(emptylist)==0:
