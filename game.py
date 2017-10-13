@@ -3,8 +3,6 @@ import os
 import getch
 from colorama import *
 
-global score
-score=0
 
 #start of pos() function
 #pos() returns string of ANSI CODE
@@ -175,6 +173,14 @@ def gamestart():
     """
     takes no arguements
     """
+    global fore_col,back_col,num_fore_col,num_back_col,score,filler
+    fore_col=(Fore.BLACK,Fore.BLUE,Fore.CYAN,Fore.MAGENTA,Fore.RED,Fore.GREEN,Fore.YELLOW,Fore.WHITE,Fore.RESET)
+    back_col=(Back.BLACK,Back.BLUE,Back.CYAN,Back.MAGENTA,Back.RED,Back.GREEN,Back.YELLOW,Back.WHITE,Back.RESET)
+    num_back_col={' ':Back.RESET,'2':Back.BLACK,'4':Back.BLUE,'8':Back.CYAN,'16':Back.MAGENTA,'32':Back.RED,'64':Back.GREEN,'128':Back.YELLOW,'256':Back.BLACK,'512':Back.BLUE,'1024':Back.CYAN,'2048':Back.WHITE,'4096':Back.MAGENTA,'8192':Back.RED,'16384':Back.GREEN,'32768':Back.YELLOW,'65536':Back.WHITE,'131072':Back.BLUE}
+    num_fore_col={' ':Fore.RESET,'2':Fore.WHITE,'4':Fore.WHITE,'8':Fore.WHITE,'16':Fore.WHITE,'32':Fore.WHITE,'64':Fore.WHITE,'128':Fore.WHITE,'256':Fore.WHITE,'512':Fore.WHITE,'1024':Fore.WHITE,'2048':Fore.BLACK,'4096':Fore.MAGENTA,'8192':Fore.WHITE,'16384':Fore.WHITE,'32768':Fore.WHITE,'65536':Fore.BLACK,'131072':Fore.BLACK}
+    score =0
+    filler =[2,2,2,2,2,2,2,2,4,2]
+
     init(autoreset=True) #initializes colors
     os.system('cls' if os.name == 'nt' else 'clear')
     print("\t \t ***2048****")
@@ -212,16 +218,15 @@ def gamestart():
             os.system('cls' if os.name == 'nt' else 'clear')
             emptylist=check(l)
             if len(emptylist)==0:
+                print("{loc}{styl}****2048****".format(loc=pos(38,2),styl=Style.BRIGHT))
+                print("{loc}{styl}============".format(loc=pos(38,3),styl=Style.BRIGHT))
+                print("{styl}score : {scor}".format(scor=score,styl=Style.BRIGHT))
                 if(isstopped(l)):
                     board(l)
                     print('gameover')
                     break
 
 #end of gamestart() function
-fore_col=(Fore.BLACK,Fore.BLUE,Fore.CYAN,Fore.MAGENTA,Fore.RED,Fore.GREEN,Fore.YELLOW,Fore.WHITE,Fore.RESET)
-back_col=(Back.BLACK,Back.BLUE,Back.CYAN,Back.MAGENTA,Back.RED,Back.GREEN,Back.YELLOW,Back.WHITE,Back.RESET)
-num_back_col={' ':Back.RESET,'2':Back.BLACK,'4':Back.BLUE,'8':Back.CYAN,'16':Back.MAGENTA,'32':Back.RED,'64':Back.GREEN,'128':Back.YELLOW,'256':Back.BLACK,'512':Back.BLUE,'1024':Back.CYAN,'2048':Back.WHITE,'4096':Back.MAGENTA,'8192':Back.RED,'16384':Back.GREEN,'32768':Back.YELLOW,'65536':Back.WHITE,'131072':Back.BLUE}
-num_fore_col={' ':Fore.RESET,'2':Fore.WHITE,'4':Fore.WHITE,'8':Fore.WHITE,'16':Fore.WHITE,'32':Fore.WHITE,'64':Fore.WHITE,'128':Fore.WHITE,'256':Fore.WHITE,'512':Fore.WHITE,'1024':Fore.WHITE,'2048':Fore.BLACK,'4096':Fore.MAGENTA,'8192':Fore.WHITE,'16384':Fore.WHITE,'32768':Fore.WHITE,'65536':Fore.BLACK,'131072':Fore.BLACK}
-score =0
-filler =[2,2,2,2,2,2,2,2,4,2]
+
+
 gamestart()
