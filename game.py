@@ -120,7 +120,7 @@ def move(x,l):
     counter=0
     temp=list(l)
 
-    if x=='w'or x=='W':
+    if x=='w'or x=='W' or ord(x)==65:
         while counter<4:
             nestlist.append(l[counter:16:4])
             counter+=1
@@ -129,7 +129,7 @@ def move(x,l):
             for k , item in enumerate(j):
                 l[i+k*4]=item
 
-    elif x=='s' or x=='S':
+    elif x=='s' or x=='S' or ord(x)==66:
         while counter<4:
             nestlist.append(l[12+counter::-4])
             counter+=1
@@ -138,7 +138,7 @@ def move(x,l):
             for k , item in enumerate(j):
                 l[i+(3-k)*4]=item
 
-    elif x=='a' or x=='A':
+    elif x=='a' or x=='A'or ord(x)==68:
         while counter<4:
             nestlist.append(l[counter*4:(counter*4)+4:1])
             counter+=1
@@ -147,7 +147,7 @@ def move(x,l):
             for k , item in enumerate(j):
                 l[i*4+k]=item
 
-    elif x=='d' or  x=='D':
+    elif x=='d' or  x=='D'or ord(x)==67:
         while counter<4:
             r=l[counter*4:(counter*4)+4:1]
             nestlist.append(r[::-1])
